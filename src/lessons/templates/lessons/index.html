@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Уроки математики{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {% if not user.is_authenticated %}
+                    <div class="alert alert-danger">
+                        <a href="{% url 'accounts:login' %}?next={{ request.path }}">Авторизуйтесь</a>, чтобы сохранять прогресс прохождения уроков
+                        и отслеживать свои результаты.
+                    </div>
+                {% endif %}
+            {% for th in themes %}{% if th.1 %}
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>{{ th.0 }} класс</strong></div>
+                    <table class="table table-bordered">
+                        <tbody>
+                        {% for theme in th.1 %}
+                            <tr>
+                                <td style="width: 20%"><strong><a href="{% url 'lessons:theme' theme.pk %}">{{ theme.title }}</a></strong></td>
+                                <td>{{ theme.description|safe }}</td>
+                                <td class="table_button_column">
+                                    {% if user.is_authenticated and theme in user.userprogress.lessons_solved_themes.all %}
+                                        <div class="label label-success">пройден</div>
+                                    {% else %}
+                                        <div class="label label-primary">доступен</div>
+                                    {% endif %}
+                                </td>
+                                <td class="table_button_column">
+                                    <a href="{% url 'lessons:lesson' theme.pk 1 %}" class="btn btn-block btn-warning">Пройти</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}{% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

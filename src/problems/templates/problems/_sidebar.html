@@ -1,0 +1,30 @@
+{% load mptt_tags %}
+
+<div id="sidebar">
+    <div class="panel-group" id="accordion">
+        {% for category in cat %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collaps{{ category.0.slug }}">
+                            <strong>{{ category.0.title }}</strong>
+                            {% if category.0.slug == 'kenguru' %}
+                                <a class="pull-right" href="{% url 'challenges:index' %}?challenge=kenguru"><i class="fa fa-bolt green-color" title="Пройти испытание"></i></a>
+                            {% elif category.0.slug == 'olimpiada' %}
+                                <a class="pull-right" href="{% url 'challenges:index' %}?challenge=olimpiada"><i class="fa fa-bolt green-color" title="Пройти испытание"></i></a>
+                            {% endif %}
+                        </a>
+                    </h4>
+                </div>
+                <div id="collaps{{ category.0.slug }}" class="panel-collapse collapse {% if not active_cat or category.0 == active_cat or category.0 == active_cat.parent %}in{% endif %}">
+                    <ul class="list-group">
+                        {% for c in category.1 %}
+                            <li class="list-group-item"><a href="{% url 'problems:category' c.slug %}">{{ c.title }}</a> <span class="badge" title="{{ c.problem_set.all|length }} задач">{{ c.problem_set.all|length }}</span></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="margin-bottom-20"></div>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {% if messages%}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li><div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+                                <a class="close" data-dismiss="alert">&times;</a>
+                                {{ message }}
+                            </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {% block content_accounts %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

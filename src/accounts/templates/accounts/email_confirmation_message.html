@@ -1,0 +1,9 @@
+{% load i18n %}{% blocktrans with current_site.name as site_name and user.email as email %}
+<p>Вы зарегистрировались на сайте {{ site_name }}.</p>
+
+<p>Для активации аккаунта перейдите по ссылке <a href="{{ activate_url }}">{{ activate_url }}</a>.</p>
+
+<p>Если вы не регистировались на нашем сайте, проигнорируйте это письмо.</p>
+
+<p>{{ site_name }}</p>
+{% endblocktrans %}

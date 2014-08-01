@@ -1,0 +1,20 @@
+{% extends 'achievments/base_achievments.html' %}
+{% load achievments_tags %}
+
+{% block title %}Все достижения - Math Challenge{% endblock %}
+
+{% block content_achievments %}
+    <h4>Все достижения <small>и количество пользователей, которые их получили.</small> </h4>
+    {% for achievment in achievments %}
+        <div class="row">
+            <div class="col-md-4">
+                {% achievment achievment.pk %}
+            </div>
+            <div class="col-md-2">
+                <span class="label label-success" style="margin-left: 20px">
+                    {{ achievment.achievments.all|length }}
+                </span>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

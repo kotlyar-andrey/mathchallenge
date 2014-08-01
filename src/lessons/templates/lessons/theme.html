@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ theme.klass }} класс, {{ theme.title }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>Тема {{ theme.title }}</strong></div>
+                    <div class="panel-body">{{ theme.description|safe }}</div>
+                    <table class="table table-bordered">
+                        {% for lesson in theme.lesson_set.all %}
+                            <tr>
+                                <td>Урок {{ forloop.counter }}. <a href="{% url 'lessons:lesson' theme.pk lesson.number %}">{{ lesson.title }}</a></td>
+                                <td class="table_button_column">
+                                    {% if user.is_authenticated and lesson in user.userprogress.lessons_solved_lessons.all %}
+                                        <div class="label label-success">пройден</div>
+                                    {% else %}
+                                        <div class="label label-primary">доступен</div>
+                                    {% endif %}
+                                </td>
+                                <td class="text-center table_button_column">
+                                    <a href="{% url 'lessons:lesson' theme.pk lesson.number %}" class="btn btn-block btn-warning">Пройти</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        achievments_check();
+    </script>
+{% endblock %}

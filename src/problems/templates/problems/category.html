@@ -1,0 +1,70 @@
+{% extends 'problems/base_problems.html' %}
+
+{% block title %}{{ category.title }} - Math Challenge{% endblock %}
+
+{% block content_problem %}
+    <div class="text-muted margin-bottom-20">
+        <strong>{{ category.title }}</strong> - {{ category.description }}
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>N</th>
+                <th class="border_left"><i class="fa fa-arrows-v grey-color" title="Рейтинг задачи"></i></th>
+                <th class="border_left"><i class="fa fa-user grey-color" title="Количество решивших"></i></th>
+                <th class="border_left">Текст задачи</th>
+                {% if user.is_authenticated %}
+                    <th class="border_left"></th>
+                {% endif %}
+            </tr>
+        </thead>
+        {% for problem in problems %}
+            <tr>
+                <td>{{ problem.number }}</td>
+                <td style="white-space: nowrap" class="border_left">
+                    <span{% if problem.rating > 0 %} style="color:#00a000;"{% elif problem.rating < 0 %} style="color:#a00000"{% endif %}>
+                        <strong>{% if problem.rating > 0 %}+{% endif %}{{ problem.rating }}</strong>
+                    </span>
+                </td>
+                <td style="white-space: nowrap" class="border_left">
+                    {{ problem.solved }}
+                </td>
+                <td onclick="document.location='{% url 'problems:problem' problem.pk %}'" style="cursor: pointer" class="border_left">{{ problem.text|safe }}</td>
+                {% if user.is_authenticated %}
+                    <td class="border_left">
+                        {% if problem in user.userprogress.problems_solved_problems.all %}
+                            <i class="fa fa-check green-color" title="Задача решена"></i><br>
+                            <a href="{% url 'problems:problem' problem.pk %}"><i class="fa fa-comments grey-color" title="Комментировать"></i></a>
+                        {% endif %}
+                        {% if problem in user.favorite_problems.all %}
+                            <a href="{% url 'problems:add_fav' problem.pk %}"><i class="fa fa-heart favorites_icon" title="Удалить с избранного"></i></a>
+                        {% else %}
+                            <a href="{% url 'problems:add_fav' problem.pk %}"><i class="fa fa-heart-o gold-color" title="Добавить в избранное"></i></a>
+                        {% endif %}
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+
+{#  Постраничная навигация  #}
+    {% if problems.paginator.num_pages > 1 %}
+        <ul class="pagination">
+            <li class="{% if not problems.has_previous %}disabled{% endif %}">
+                {% if problems.has_previous %}
+                    <a href="?page={{ problems.previous_page_number }}" title="Предыдущая страница">&larr; сюда</a>
+                    {% else %}<a href="">&larr; сюда</a>{% endif %}
+            </li>
+            {% for obj in problems.paginator.page_range %}
+                <li {% if obj == problems.number %}class="active"{% endif %}>
+                    <a href="?page={{ obj }}" title="На страницу {{ obj }}">{{ obj }}</a>
+                </li>
+            {% endfor %}
+            <li class="{% if not problems.has_next %}disabled{% endif %}">
+                {% if problems.has_next %}
+                    <a href="?page={{ problems.next_page_number }}" title="Следующая страница">&rarr; туда</a>
+                    {% else %}<a href="">&rarr; туда</a>{% endif %}
+            </li>
+        </ul>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'problems/base_problems.html' %}
+
+{% block title %}Испытание Кенгуру - {{ category.title }}{% endblock %}
+
+{% block head %}
+    <script src="/static/js/challenge.js"></script>
+{% endblock %}
+
+{% block content_problem %}
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Испытание Кенгуру - {{ category.title }}</h3>
+            <form method="post" id="answer_form">{% csrf_token %}
+            {% for problem in problems %}
+                <div class="challenge_problem" id="pr{{ forloop.counter }}">
+                    <div id="problem{{ problem.pk }}"><strong>{{ forloop.counter }}</strong>. {{ problem.text|safe }}<br></div>
+                    <div class="kenguru-answer-form">
+                            <input class="radio radio-inline" type="radio" name="answer{{ problem.pk }}" value="{{ problem.variant_set.all.0.pk }}">({{ problem.variant_set.all.0.nam }})&nbsp;{{ problem.variant_set.all.0.val|safe }}
+                            <input class="radio radio-inline" type="radio" name="answer{{ problem.pk }}" value="{{ problem.variant_set.all.1.pk }}">({{ problem.variant_set.all.1.nam }})&nbsp;{{ problem.variant_set.all.1.val|safe }}
+                            <input class="radio radio-inline" type="radio" name="answer{{ problem.pk }}" value="{{ problem.variant_set.all.2.pk }}">({{ problem.variant_set.all.2.nam }})&nbsp;{{ problem.variant_set.all.2.val|safe }}
+                            <input class="radio radio-inline" type="radio" name="answer{{ problem.pk }}" value="{{ problem.variant_set.all.3.pk }}">({{ problem.variant_set.all.3.nam }})&nbsp;{{ problem.variant_set.all.3.val|safe }}
+                            <input class="radio radio-inline" type="radio" name="answer{{ problem.pk }}" value="{{ problem.variant_set.all.4.pk }}">({{ problem.variant_set.all.4.nam }})&nbsp;{{ problem.variant_set.all.4.val|safe }}
+                    </div>
+                    <hr>
+                </div>
+            {% endfor %}
+            </form>
+            <div id="button_res">
+                <button class="btn btn-success" id="answerButton">Отправить на проверку</button>
+            </div>
+            <div id="timer"></div>
+            <div id="target"></div>
+        </div>
+    </div>
+{% endblock %}

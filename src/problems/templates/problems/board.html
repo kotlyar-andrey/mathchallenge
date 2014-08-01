@@ -1,0 +1,45 @@
+{% extends 'problems/base_problems.html' %}
+{% load problems_tag %}
+
+{% block title %}Доска почета - Math Challenge{% endblock %}
+
+{% block content_problem %}
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <h4>Доска почета</h4>
+        </div>
+        <div class="panel-body">
+            <p class="text-muted">За каждую решенную задачу начисляется от 3 до 5 баллов в зависимости от ее сложности.</p>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Имя</th>
+                    <th>Количество <i class="fa fa-money"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in users|slice:":10" %}
+                    <tr {% if u == user %} class="text-strong" {% endif %}>
+                        <td>{{ forloop.counter }}</td>
+                        <td><a href="{% url 'accounts:profile' u.pk %}"><img class="pull-left margin-right-20 img-circle" style="width:50px;" src={{ u.avatar }}> {{ u.get_full_name }}</a></td>
+                        <td>{{ u.get_points }}</td>
+                    </tr>
+                {% endfor %}
+                {% if not user in users|slice:":10" and user.is_authenticated %}
+                    <tr>
+                        <td colspan="3">
+                            ...
+                        </td>
+                    </tr>
+                    <tr class="text-strong">
+                        <td>{{ user|index_of:users|add:"1" }}</td>
+                        <td><a href="{% url 'accounts:profile' user.pk %}">{{ user.get_full_name }}</a></td>
+                        <td>{{ user.get_points }}</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

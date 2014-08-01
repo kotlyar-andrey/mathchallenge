@@ -1,0 +1,150 @@
+{% extends 'accounts/base_accounts.html' %}
+{% load problems_tag lessons_tags achievments_tags challenge_tags %}
+
+{% block title %}{{ user_obj.get_full_name }}, профиль пользователя - Math Challenge{% endblock %}
+
+{% block content_accounts %}
+    <div class="row" xmlns="http://www.w3.org/1999/html">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4 margin-bottom-20">
+                    <img class="img-circle pull-left margin-right-20" src={{ user_obj.avatar }}>
+                    <h4 class="margin-top-20">{{ user_obj.get_full_name }}</h4>
+                    <span class="clearfix">Решено {{ user_obj.userprogress.problems_solved_problems.all|length }} задач из {{ pr_count }} ({{ user_obj.get_points }} <i class="fa fa-money"></i>)</span>
+                </div>
+            </div>
+            {% if user == user_obj %}
+                <a href="{% url 'accounts:edit' %}" class="btn btn-primary pull-right">Изменить</a>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#lessons" data-toggle="tab"><strong><i class="fa fa-book"></i> Уроки</strong></a></li>
+                    <li><a href="#problems" data-toggle="tab"><strong><i class="fa fa-question-circle"></i> Задачи</strong></a></li>
+                    <li><a href="#challenge" data-toggle="tab"><strong><i class="fa fa-bolt"></i> Испытания</strong></a></li>
+                    <li><a href="#favorites" data-toggle="tab"><strong><i class="fa fa-heart"></i> Избранное</strong></a></li>
+                    <li><a href="#achienments" data-toggle="tab"><strong><i class="fa fa-certificate"></i> Достижения</strong></a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="lessons">
+                        <table class="table table-bordered table-striped margin-top-20">
+                            <thead>
+                                <tr>
+                                    <th>Название темы</th>
+                                    <th>Описание</th>
+                                    <th colspan="2">Прогресс</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for th in themes %}{% if th.1 %}
+                                    <tr>
+                                        <td colspan="4">{{ th.0 }} класс</td>
+                                    </tr>
+                                    {% for theme in th.1 %}
+                                        <tr>
+                                            <td><a href="{% url 'lessons:theme' theme.pk %}">{{ theme.title }}</a></td>
+                                            <td>{{ theme.description }}</td>
+                                            <td style="width: 15%">
+                                                <div class="progress">
+                                                    <div class="progress-bar{% if user|get_theme_progress:theme == 100 %} progress-bar-success{% endif %}" role="progressbar" style="width: {{ user|get_theme_progress:theme }}%;"></div>
+                                                </div>
+                                            </td>
+                                            <td style="width: 5%; white-space: nowrap">{{ user|get_lesson_progress:theme }} / {{ theme.lesson_set.all|length }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="tab-pane fade" id="problems">
+                        <div class="progress margin-top-20 text-center">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="{{ solved_progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ solved_progress }}%;">
+                                <span class="progress_bar_text">Решено {{ user.userprogress.problems_solved_problems.all|length }} из {{ pr_count }} задач</span>
+                            </div>
+                        </div>
+                        {% for cat in categories %}
+                            <div class="panel panel-primary" style="min-width: 1000px">
+                                <div class="panel-heading">{{ cat.0.title }}</div>
+{#                                Список подкатегорий данной категории #}
+                                {% for l in cat.1 %}
+                                    {% for c in l %}
+                                        <div class="problems_cat_container">
+                                            <div class="title">{{ c.title }}</div>
+                                            <div class="body">
+                                                {% tables c.problem_set.all %}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    <div class="clearfix"></div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="tab-pane fade" id="challenge">
+                        <div class="margin-top-20"></div>
+                        <h4>Лучшие результаты испытаний</h4>
+                        {% for cat in categories %}
+                            {% for l in cat.1 %}
+                                {% for c in l %}
+                                    <div class="best_res">
+                                        <div class="best_res_title">{{ c.title }}</div>
+                                            {% if c in chall_cat %}
+                                                {% for cb in user.userprogress.challenge_best.all %}
+                                                    {% if c == cb.category %}
+                                                        <div class="best_res_result {{ cb.result|kenguru_result:c.slug }}"> {{ cb.result }}</div>
+                                                        <a class="btn btn-primary challenge_go" href="{% url 'challenges:challenge' c.slug %}">Пройти еще раз</a>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% else %}
+                                                <div class="best_res_result">&nbsp;-</div>
+                                                <a class="btn btn-primary challenge_go" href="{% url 'challenges:challenge' c.slug %}">Пройти</a>
+                                            {% endif %}
+                                        <div class="clearfix"></div>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+
+                    <div class="tab-pane fade" id="favorites">
+                        <div class="margin-top-20"></div>
+                        {% for pr in favorites %}
+                            <div class="alert alert-warning" style="box-shadow: 1px 1px 2px grey">
+                                <a class="close" data-dismiss="alert" href="{% url 'problems:add_fav' pr.pk %}" title="Убрать с избранного">&times;</a>
+                                <div class="text-muted" style="padding: 4px 0 8px 0;">
+                                    {{ pr.category.parent.title }} - <a href="{% url 'problems:category' pr.category.slug %}" class="text-muted">{{ pr.category.title }}</a> - Задача №{{ pr.number }}
+                                    {% if pr in user.userprogress.problems_solved_problems.all %} <i class="fa fa-check grey-color" title="Задача решена"></i>{% endif %}
+                                </div>
+                                {{ pr.text|safe }}
+                                <p class="text-right"><a href="{% url 'problems:problem' pr.pk %}">Перейти к задаче</a></p>
+                            </div>
+                        {% empty %}
+                            <div class="alert alert-info">У вас пока нет избранных задач.</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="tab-pane fade" id="achienments">
+                        <div class="margin-top-20"></div>
+                        {% for ach in user.userprogress.achievments.all %}
+                            {% achievment ach.pk %}
+                        {% empty %}
+                            <div class="alert alert-info">
+                                <p>Вы еще не получили ни одного достижения.</p>
+                            </div>
+                        {% endfor %}
+{#                        {% for ach in achievments %}#}
+{#                            {% if not ach in user.userprogress.achievments.all %}#}
+{#                                {% achievment ach.pk %}#}
+{#                            {% endif %}#}
+{#                        {% endfor %}#}
+                        <p><a href="{% url 'achievments:index' %}">Все достижения</a></p>
+                    </div>
+                </div>
+            {% else %}
+
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

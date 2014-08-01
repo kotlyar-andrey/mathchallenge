@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load lessons_tags %}
+
+{% block title %}{{ lesson.title }} - {{ theme.title }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>{{ lesson.title }} <small>({{ lesson.number }}/{{ theme.lesson_set.all|length }})</small></h3>
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="material">
+                            {{ lesson.material|safe }}
+                        </div>
+                    </div>
+                    {% if lesson.remember_set.all %}
+                        <div class="col-md-3 well">
+                            <div class="remember_title">Запомни</div>
+                            {% for rememb in lesson.remember_set.all %}
+                                <h5>{{ rememb.title }}</h5>
+                                {{ rememb.text|safe }}
+                                {% if not forloop.last %}<hr>{% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <h4>Задания</h4>
+                <div class="text-muted margin-bottom-20">Выполни все задания для успешного прохождения урока.</div>
+                {% for task in tasks %}
+                    <div class="row">
+                        <div class="col-md-1 text-center">
+                            <span class="badge {{ task.slog|slog_color }}">&nbsp;</span>
+                        </div>
+                        <div class="col-md-8">
+                            {{ task.text|safe }}
+                        </div>
+                        <div class="col-md-3">
+                            <form class="form-inline" role="form" method="post">{% csrf_token %}
+                                <div class="form-group">
+                                    {{ form.answer }}
+                                    <input type="hidden" name="task_pk" value="{{ task.pk }}">
+                                </div>
+                                <button type="button" id="answer_{{ task.pk }}" class="btn btn-primary"><i class="fa fa-question"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    {% if not forloop.last %}<hr>{% endif %}
+                {% endfor %}
+                <div class="col-md-3 col-md-offset-9">
+                    <a class="btn btn-success btn-block margin-top-20"
+                       id="next_challenge" style="display: none" href="{% url 'lessons:lesson' theme.pk lesson.number|add:"1" %}">Следующий урок</a>
+                </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function () {
+            $("input").blur(function() {
+                var this_input = $(this);
+                var task_pk = $(this).next('input').attr('value');
+                var div_out_id = '#answer_' + task_pk;
+                var form = $(div_out_id).parents('form');
+                var msg   = form.serialize();
+
+                function redirect() {
+                    location = "{% url 'lessons:theme' theme.pk %}";
+                }
+
+                function suc(data) {
+                    $(div_out_id).removeClass('btn-primary btn-success btn-danger');
+                    if (data == 'theme_complit') {
+                        $(div_out_id).html('<i class="fa fa-check">');
+                        $(div_out_id).addClass('btn-success');
+                        this_input.attr('disabled', true);
+                        setTimeout(redirect, 1000);
+                    } else {
+                        if (data == 'True') {
+                            $(div_out_id).html('<i class="fa fa-check">');
+                            $(div_out_id).addClass('btn-success');
+                            this_input.attr('disabled', true);
+                            if (document.getElementsByClassName('fa-check').length == {{ tasks|length }}) {
+                                $('#next_challenge').show("slow");
+                            }
+                            achievments_check();
+                        } else {
+                            $(div_out_id).html('<i class="fa fa-times">');
+                            $(div_out_id).addClass('btn-danger');
+                        }
+                    }
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    data: msg,
+                    url: '/lessons/check/',
+                    beforeSend: function() { $(div_out_id).html('...'); },
+                    success: suc,
+                    error: function () {$(div_out_id).html('err')}
+                })
+            });
+        });
+    </script>
+{% endblock %}

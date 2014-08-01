@@ -1,0 +1,57 @@
+{% extends 'problems/base_problems.html' %}
+{% load bootstrap %}
+
+{% block title %}Выбор испытания{% endblock %}
+
+{% block content_problem %}
+    <p class="text-muted">
+        В режиме испытания задачи подбираются случайным образом так, чтобы максимально соответствовать реальному конкурсу.
+        Достигается это благодаря алгоритму, который выбирает задачи нужной категории и сложности.
+    </p>
+    <form method="get" action="." class="form-horizontal">
+        <div class="form-group">
+            <label for="challenge-field" class="col-sm-4 control-label">Выберите испытание</label>
+            <div class="col-sm-4">
+                <select name="challenge" id="challenge-field" class="form-control" onchange="challenge_change(this.value)">
+                    <option selected="selected" disabled="disabled">----------</option>
+                    <option value="kenguru"{% if categories and request.get_full_path == '/challenge/?challenge=kenguru' %}selected="selected" {% endif %}>Кенгуру</option>
+                    <option value="olimpiada"{% if categories and request.get_full_path == '/challenge/?challenge=olimpiada' %}selected="selected" {% endif %}>Олимпиада</option>
+                </select>
+            </div>
+        </div>
+        <div id="target">
+            {% if categories %}
+                <div class="form-group" id="category-block">
+                    <label for="category-field" class="col-sm-4 control-label">Категория</label>
+                    <div class="col-sm-4">
+                        <select name="category" id="category-field" class="form-control" onchange="$('#challenge-start').show('easy')">
+                            {% for category in categories %}
+                                <option value="{{ category.slug }}">{{ category.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <div class="col-sm-4 col-sm-offset-4">
+                <button id="challenge-start" type="submit" class="btn btn-success" {% if not categories %}style="display: none"{% endif %}>Начать</button>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        function challenge_change(challenge) {
+            $('#category-block').removeClass('hide');
+            $.ajax({
+                type: 'GET',
+                url: '/challenge/challenge_change/',
+                data: {'challenge': challenge},
+                success: function (html) {
+                    $('#target').html(html);
+                    $('#challenge-start').show('easy');
+                }
+            });
+        }
+    </script>
+{% endblock %}

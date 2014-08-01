@@ -1,0 +1,10 @@
+<div class="form-group" id="category-block">
+    <label for="category-field" class="col-sm-4 control-label">Категория</label>
+    <div class="col-sm-4">
+        <select name="category" id="category-field" class="form-control" onchange="$('#challenge-start').show('easy')">
+            {% for category in categories %}
+                <option value="{{ category.slug }}">{{ category.title }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>

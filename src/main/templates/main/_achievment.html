@@ -1,0 +1,24 @@
+{% for achievment in achievments %}
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Получено новое достижение!</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>{{ achievment.title }}</h4>
+                    <p>{{ achievment.condition|safe }}</p>
+                </div>
+                <div class="modal-footer">
+                    <script type="text/javascript" src="//yandex.st/share/share.js"
+                            charset="utf-8"></script>
+                    <div class="yashare-auto-init" data-yashareL10n="ru"
+                         data-yashareType="none" data-yashareTitle="Я получил новое достижение - {{ achievment.title }}" data-yashareDescription="{{ achievment.condition|safe }}" data-yashareQuickServices="vkontakte,facebook,twitter,gplus"
+
+                            ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

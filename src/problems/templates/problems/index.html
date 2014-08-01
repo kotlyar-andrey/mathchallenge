@@ -1,0 +1,53 @@
+{% extends 'problems/base_problems.html' %}
+
+
+{% block title %}
+    Задачи по математике - Math Challenge
+{% endblock %}
+
+{% block content_problem %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Добавленные задачи
+                </div>
+                <ul class="list-group" id="new_problems">
+                    {% for problem in last_pr %}
+                        <li class="list-group-item">
+                            <div class="row">
+{#                                <div class="col-md-3"><a href="{% url 'problems:category' problem.category.slug %}">{{ problem.category.title }}</a></div>#}
+                                <div class="col-md-12">
+                                    <div class="pointer" onclick="document.location='{% url 'problems:problem' problem.pk %}'">{{ problem.text|safe|truncatewords:30|linebreaksbr }}</div>
+                                    <a class="pull-right" href="{% url 'problems:category' problem.category.slug %}"><small class="text-muted">{{ problem.category.title }}</small></a>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    Рейтинговые задачи
+                </div>
+                <ul class="list-group" id="rating_problems">
+                    {% for problem in rating_pr %}
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-2 text-center">
+                                    <span{% if problem.rating > 0 %} style="color:#00a000;"{% elif problem.rating < 0 %} style="color:#a00000"{% endif %}>
+                                        <strong>{% if problem.rating > 0 %}+{% endif %}{{ problem.rating }}</strong>
+                                    </span>
+                                </div>
+                                <div class="col-md-10 pointer" onclick="document.location='{% url 'problems:problem' problem.pk %}'">{{ problem.text|safe|truncatewords:30|linebreaksbr }}</div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+{% endblock %}

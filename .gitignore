@@ -1,2 +1,9 @@
 /.idea/
+/bootstrapform/
+/mptt/
+/social_auth/
 *.pyc
+*.txt
+*.sql
+*.png
+tobd*

@@ -1,0 +1,102 @@
+{% extends 'problems/base_problems.html' %}
+{% load bootstrap lessons_tags %}
+
+{% block title %}
+    Задача по математике
+{% endblock %}
+
+{% block content_problem %}
+    {% if not user.is_authenticated %}
+        <div class="alert alert-warning">
+            <a href="{% url 'accounts:login' %}?next={{ request.path }}">Авторизуйтесь</a> чтобы иметь возможность влиять на рейтинг задачи и сохранить прогресс решенных задач
+        </div>
+    {% endif %}
+    <div class="margin-bottom-20 clearfix">
+        <div class="pull-left margin-right-20">
+            <span class="text-info">Рейтинг:</span>
+            <form method="post">
+                {% csrf_token %}
+                <button name="plus" class="btn btn-sm btn-success{% if problem in user.ratings_problems.all or not user.is_authenticated %} disabled{% endif %}" type="submit">&uarr;</button>
+                <span class="btn btn-sm btn-info disabled"{% if problem.rating > 0 %} style="color:#005000;"{% elif problem.rating < 0 %}style="color:#500000"{% endif %}>
+                    <strong>{% if problem.rating > 0 %}+{% endif %}{{ problem.rating }}</strong>
+                </span>
+                <button name="minus" class="btn btn-sm btn-danger{% if problem in user.ratings_problems.all or not user.is_authenticated %} disabled{% endif %}" type="submit">&darr;</button>
+            </form>
+        </div>
+        <div class="pull-left margin-right-20">
+            <span class="text-info">Решили: </span><br>
+            <div class="btn btn-sm btn-primary disabled">{{ problem.solved }}</div>
+        </div>
+        <div class="pull-left">
+            <span class="text-info">Поделиться</span><br>
+            <script type="text/javascript" src="//yandex.st/share/share.js"
+                    charset="utf-8"></script>
+            <div class="yashare-auto-init" data-yashareL10n="ru"
+                 data-yashareType="icon" data-yashareDescription="{{ problem.text }}" data-yashareQuickServices="yaru,vkontakte,facebook,twitter,odnoklassniki,moimir"
+
+                    ></div>
+
+        </div>
+        <a class="pull-right" href="{% url 'problems:category' problem.category.slug %}"><i class="fa fa-mail-reply"> Вернуться к {{ problem.category.title }}</i></a>
+        {% if user.is_authenticated %}
+            <div class="text-center">
+                {% if problem in user.favorite_problems.all %}
+                    <a href="{% url 'problems:add_fav' problem.pk %}"><i class="fa fa-2x fa-heart favorites_icon" title="Удалить c избранного"></i></a>
+                {% else %}
+                    <a href="{% url 'problems:add_fav' problem.pk %}"><i class="fa fa-2x fa-heart-o gold-color" title="Добавить в избранное"></i></a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+    <hr>
+    <div class="well margin-bottom-20" id="problem-text">{{ problem.text|safe }}</div>
+    <div class="row"></div>
+    {% if prw %}<a href="{% url 'problems:problem' prw.pk %}" class="pull-left"><i class="fa icon-green fa-long-arrow-left" title="Предыдущая задача"></i></a>{% endif %}
+    {% if nxt %}<a href="{% url 'problems:problem' nxt.pk %}" class="pull-right"><i class="fa fa-long-arrow-right icon-green" title="Следующая задача"></i></a>{% endif %}
+    {% if user.is_authenticated and problem in user.userprogress.problems_solved_problems.all %}
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                Задача решена! Ответ: {{ problem.answer }}
+            </div>
+            <div class="margin-bottom-60"></div>
+            <div class="text-muted">Добро пожаловать к обсуждению задачи!</div>
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                var disqus_shortname = 'mathchallenge'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <form action="." method="post">{% csrf_token %}
+                    <div class="input-group">
+                        <span class="input-group-addon">Ответ:</span>
+                        {{ form.answer }}
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit" name="answ">Отправить</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    {% if user.is_authenticated %}
+        <script>
+            achievments_check();
+        </script>
+    {% endif %}
+{% endblock %}

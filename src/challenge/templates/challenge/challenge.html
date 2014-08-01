@@ -1,0 +1,10 @@
+{% extends 'problems/base_problems.html' %}
+
+{% block title %}Испытание {{ category.parent.title }} - {{ category.title }}{% endblock %}
+
+{% block content_problem %}
+    <h4>Испытание {{ category.parent.title }} - {{ category.title }}</h4>
+    {% for problem in problems %}
+        {{ problem.text|safe }}<hr>
+    {% endfor %}
+{% endblock %}

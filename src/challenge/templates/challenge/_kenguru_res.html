@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="alert alert-success pull-left" style="height: 10px;margin-right: 10px">&nbsp</div> - решено правильно
+        <div class="clearfix"></div>
+    </div>
+    <div class="col-md-7 col-md-offset-1">
+        <div class="alert alert-error pull-left" style="height: 10px;margin-right: 10px">&nbsp</div> - решено неправильно или нерешено
+    </div>
+</div>
+<hr>
+<h3>Набрано {{ ball }} из {% if cat == 'malysh_2' or cat == 'malysh_34' %}95{% else %}120{% endif %} баллов&nbsp;
+    {% if cb_result %}<small>наилучший результат - {{ cb_result }}</small>{% endif %}
+</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Решено всего</th>
+            <th>Задач в 3 балла</th>
+            <th>Задач в 4 балла</th>
+            <th>Задач в 5 баллов</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% if cat == 'malysh_2' or cat == 'malysh_34' %}
+                <td>{{ true_count }}/25</td>
+                <td>{{ true_3 }}/10</td>
+                <td>{{ true_4 }}/10</td>
+                <td>{{ true_5 }}/5</td>
+            {% else %}
+                <td>{{ true_count }}/30</td>
+                <td>{{ true_3 }}/10</td>
+                <td>{{ true_4 }}/10</td>
+                <td>{{ true_5 }}/10</td>
+            {% endif %}
+        </tr>
+    </tbody>
+</table>
+<script>
+    $(function(){
+        achievments_check();
+        $('[id^="problem"]').addClass('alert alert-error');
+        {% for pr in true_problems %}
+            $('#problem{{ pr }}').removeClass('alert-error').addClass('alert-success');
+        {% endfor %}
+    });
+</script>
