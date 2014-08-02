@@ -143,6 +143,7 @@ INSTALLED_APPS = (
     'south',
     'mptt',
     'social_auth',
+    'yacaptcha',
 
     'src.main',
     'src.lessons',
