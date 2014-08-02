@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import os
+from local_settings import *
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
-ADMINS = (
-    ('kotlyar', 'kotlyar562@gmail.com'),
-)
 
 
 def rel_project(*x):
@@ -15,16 +13,17 @@ def rel_project(*x):
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mathchell',
-        'USER': 'kotlyar',
-        'PASSWORD': '25838657',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
+#перенесено в local_settings.py
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'math',
+#         'USER': 'root',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -86,9 +85,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
-
-
-SECRET_KEY = '&=&@%o+dt4ed@#_s1x(*06%(lb%889)pt4x6c8d6jycp5^_7wv'
 
 
 TEMPLATE_LOADERS = (

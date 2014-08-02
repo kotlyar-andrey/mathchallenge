@@ -2,6 +2,7 @@
 /bootstrapform/
 /mptt/
 /social_auth/
+/src/local_settings.py
 *.pyc
 *.txt
 *.sql
