@@ -3,6 +3,7 @@
 /mptt/
 /social_auth/
 /src/local_settings.py
+/yacaptcha/
 *.pyc
 *.txt
 *.sql
