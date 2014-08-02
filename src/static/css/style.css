@@ -122,6 +122,12 @@
     padding: 5px;
     margin-top: 20px;
 }
+.feedback{
+    color:#9affab;
+}
+.feedback:hover{
+    color: #fff;
+}
 
 /*Category sidebar*/
 #sidebar {
