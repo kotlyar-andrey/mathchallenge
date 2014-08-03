@@ -7,12 +7,26 @@ from django.contrib import messages
 
 from src.decorators import render_to
 from src.achievments.models import Achievment
+from src.accounts.models import User
+from src.problems.models import Problem
 from . forms import FeedbackForm
 
 
 @render_to('main/index.html')
 def index(request):
-    return {'achs': Achievment.objects.all()}
+    users = User.objects.all()
+    solved_problems = 0
+    achievments = 0
+    for u in users:
+        solved_problems += len(u.userprogress.problems_solved_problems.all())
+        achievments += len(u.userprogress.achievments.all())
+    return {
+        'user_count': len(users),
+        'solved_count': solved_problems,
+        'ach_done_count': achievments,
+        'problems_count': len(Problem.objects.all()),
+
+    }
 
 
 def achievments_check(request):

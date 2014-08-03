@@ -4,9 +4,9 @@
 /social_auth/
 /yacaptcha/
 /src/local_settings.py
+/src/media/
 /yacaptcha/
 *.pyc
 *.txt
 *.sql
-*.png
 tobd*

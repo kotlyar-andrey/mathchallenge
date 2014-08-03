@@ -6,9 +6,6 @@ $(function () {
     var time = 4500;
     function timer() {
         time = time - 1;
-        if (time<=0) {
-            alert('Время вышло');
-        }
         hh = Math.floor(time/3600);
         mm = Math.floor(time/60) - hh*60;
         ss = time - mm*60 - hh*3600;

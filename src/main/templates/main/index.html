@@ -2,12 +2,67 @@
 
 {% block title %}Математика - изучаем математику просто и интересно! Уроки математики, задачи по математике.{% endblock %}
 
+{% block head %}
+    <script src="/static/bxslider/jquery.bxslider.min.js"></script>
+    <script>
+        $(function () {
+            $('.bxslider').bxSlider({
+                mode: 'fade',
+                captions: true,
+                auto: true,
+                autoControls: true,
+                pause: 5000
+            });
+        })
+    </script>
+    <link href="/static/bxslider/jquery.bxslider.css" rel="stylesheet" />
+{% endblock %}
+
 {% block content %}
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h3>Добро пожаловать на сайт интересных математических задач и испытаний!</h3>
-                <p>Решай задачи разных математических конкурсов и зарабатывай достижения. Стань лучшим и попади на Доску почета!</p>
+                <h2 class="text-center margin-bottom-20">Добро пожаловать на сайт интересных математических задач и испытаний!</h2>
+{#                <p>Решай задачи разных математических конкурсов и зарабатывай достижения. Стань лучшим и попади на Доску почета!</p>#}
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <ul class="bxslider">
+                            <li><img src="/static/images/slider/pic1.png" title="Решай задачи, голосуй за понравившиеся и делись с друзьями." /></li>
+                            <li><img src="/static/images/slider/pic2.png" title="Готовься к математическим конкурсам, проходи испытания!" /></li>
+                            <li><img src="/static/images/slider/pic3.png" title="Получай достижения." /></li>
+                            <li><img src="/static/images/slider/pic4.png" title="Следи за своим прогрессом в личном кабинете." /></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <h2 class="text-center margin-bottom-20">Интересная статистика сайта</h2>
+                    <div class="col-md-4">
+                        <div class="st-block">
+                            Зарегистрировано<br>
+                            <span>{{ user_count }}</span><br>
+                            пользователей,
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="st-block">
+                            которые решили<br>
+                            <span>{{ solved_count }}</span><br>
+                            задач
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="st-block">
+                            и получили<br>
+                            <span>{{ ach_done_count }}</span><br>
+                            достижений.
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <a class="text-center btn btn-block btn-lg btn-success" href="{% url 'accounts:login' %}">Присоединяйся!</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

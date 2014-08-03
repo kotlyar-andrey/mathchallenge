@@ -9,9 +9,9 @@
                         <a data-toggle="collapse" data-parent="#accordion" href="#collaps{{ category.0.slug }}">
                             <strong>{{ category.0.title }}</strong>
                             {% if category.0.slug == 'kenguru' %}
-                                <a class="pull-right" href="{% url 'challenges:index' %}?challenge=kenguru"><i class="fa fa-bolt green-color" title="Пройти испытание"></i></a>
+                                <a class="pull-right" href="{% url 'challenges:index' %}?challenge=kenguru"><i class="fa fa-bolt" title="Пройти испытание"></i></a>
                             {% elif category.0.slug == 'olimpiada' %}
-                                <a class="pull-right" href="{% url 'challenges:index' %}?challenge=olimpiada"><i class="fa fa-bolt green-color" title="Пройти испытание"></i></a>
+                                <a class="pull-right" href="{% url 'challenges:index' %}?challenge=olimpiada"><i class="fa fa-bolt" title="Пройти испытание"></i></a>
                             {% endif %}
                         </a>
                     </h4>
