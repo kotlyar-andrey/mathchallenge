@@ -16,4 +16,5 @@ urlpatterns = patterns('',
     url(r'^auth/', include('src.accounts.urls', 'accounts')),
     url(r'^achievments/', include('src.achievments.urls', 'achievments')),
     url(r'^challenge/', include('src.challenge.urls', 'challenges')),
+    url(r'^game/', include('src.games.urls', 'games')),
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

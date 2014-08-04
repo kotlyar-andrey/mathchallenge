@@ -151,6 +151,7 @@ INSTALLED_APPS = (
     'src.accounts',
     'src.achievments',
     'src.challenge',
+    'src.games',
 )
 
 AUTH_USER_MODEL = 'accounts.User'
