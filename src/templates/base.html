@@ -49,6 +49,7 @@
                                 <li><a href="/challenge/?challenge=olimpiada">Олимпиада</a></li>
                             </ul>
                         </div>
+                        <a href="{% url 'games:index' %}" class="btn btn-info">Играть</a>
                         <div class="pull-right">
                             {% if user.is_authenticated %}
                                 <a href="{% url 'accounts:profile' user.pk %}" class="btn btn-success">Профиль</a>

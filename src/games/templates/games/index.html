@@ -1,5 +1,23 @@
-{% extends 'base.html' %}
+{% extends 'games/base_games.html' %}
 
 {% block title %}
     Игры и тренажеры - Math Challenge
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/games/ust_schet.css">
+    <script src="/static/js/games/ust_schet.js"></script>
+{% endblock %}
+
+{% block content_games %}
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Математические игры на сайте MathChallenge.ru</h2>
+            {% for game in games %}
+                <h3><a href="{% url 'games:game' game.pk %}">{{ game.title }}</a></h3>
+                {{ game.description|safe }}
+                <hr>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

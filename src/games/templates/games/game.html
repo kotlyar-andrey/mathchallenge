@@ -1,0 +1,20 @@
+{% extends 'games/base_games.html' %}
+
+{% block title %}
+    {{ game.title }} - Игры Math Challenge
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ game.style_path }}">
+    <script src="{{ game.script_path }}"></script>
+{% endblock %}
+
+{% block content_games %}
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center">{{ game.title }}</h2>
+            {{ game.meta_d }}<hr>
+            {{ game.content|safe }}
+        </div>
+    </div>
+{% endblock %}
