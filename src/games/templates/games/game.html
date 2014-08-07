@@ -1,4 +1,5 @@
 {% extends 'games/base_games.html' %}
+{% load games_tags %}
 
 {% block title %}
     {{ game.title }} - Игры Math Challenge
@@ -13,8 +14,15 @@
     <div class="row">
         <div class="col-md-12">
             <h2 class="text-center">{{ game.title }}</h2>
-            {{ game.meta_d }}<hr>
+            {{ game.meta_d }}
+            <hr>
+            {% if not user.is_authenticated %}
+                <div class="alert alert-warning">
+                    <a href="{% url 'accounts:login' %}?next={{ request.path }}">Авторизуйтесь</a> чтобы иметь возможность сохранить прогресс игры
+                </div>
+            {% endif %}
             {{ game.content|safe }}
+            {% inc_res game.pk %}
         </div>
     </div>
 {% endblock %}

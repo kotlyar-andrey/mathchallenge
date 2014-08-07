@@ -47,6 +47,8 @@ def get_randoms(objects, count):
 
 def challenge(request, category_slug):
     cat = get_object_or_404(Category, slug=category_slug)
+    if not cat.parent:
+        raise Http404
     problems1, problems2, problems3 = (list(cat.problem_set.all().filter(slogn=1)), list(cat.problem_set.all().filter(slogn=2)), list(cat.problem_set.all().filter(slogn=3)))
     if cat.parent.slug == 'kenguru':
         if cat.slug == 'malysh_2' or cat.slug == 'malysh_34':

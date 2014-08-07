@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
 from .forms import AdminUserAddForm, AdminUserChangeForm
-from .models import User, UserProgress, ChallengeResult
+from .models import User, UserProgress, ChallengeResult, GamesResult
 
 
 class ProgressInline(admin.StackedInline):
@@ -12,7 +12,7 @@ class ProgressInline(admin.StackedInline):
 
 
 class UserAdmin(admin.ModelAdmin):
-    inlines = [ProgressInline,]
+    inlines = [ProgressInline]
     form = AdminUserChangeForm
     add_form = AdminUserAddForm
     fieldsets = (
@@ -27,8 +27,7 @@ class UserAdmin(admin.ModelAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'password1', 'password2')}
-        ),
+            'fields': ('username', 'email', 'password1', 'password2')}),
     )
 
 
@@ -37,6 +36,13 @@ class ChallengeResultAdmin(admin.ModelAdmin):
     list_filter = ('category',)
     ordering = ('category', 'result')
     list_display_links = ('category',)
+
+
+class GameResultAdmin(admin.ModelAdmin):
+    list_display = ('game', 'result')
+    list_filter = ('game',)
+    ordering = ('game', 'result')
+
 #
 # class UserAdmin(admin.ModelAdmin):
 #     form = AdminUserChangeForm
@@ -62,3 +68,4 @@ class ChallengeResultAdmin(admin.ModelAdmin):
 admin.site.register(User, UserAdmin)
 admin.site.register(UserProgress)
 admin.site.register(ChallengeResult, ChallengeResultAdmin)
+admin.site.register(GamesResult, GameResultAdmin)

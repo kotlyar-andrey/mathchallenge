@@ -20,6 +20,7 @@ from src.mail import send_templated_email
 from src.lessons.models import Theme, Lesson, Task
 from src.problems.models import Problem, Category
 from src.achievments.models import Achievment
+from src.games.models import Game
 
 
 EMAIL_CONFIRMATION_DAYS = getattr(settings, 'EMAIL_CONFIRMATION_DAYS', 3)
@@ -177,12 +178,25 @@ class ChallengeResult(models.Model):
     result = models.IntegerField(verbose_name=u'Лучший результат')
 
     class Meta:
-        verbose_name = u'Лучший результат'
-        verbose_name_plural = u'Лучшие результаты'
+        verbose_name = u'Лучший результат испытания'
+        verbose_name_plural = u'Лучшие результаты испытаний'
 
 
     def __unicode__(self):
         return u'%s - %s' % (self.category, self.result)
+
+
+class GamesResult(models.Model):
+    game = models.ForeignKey(Game, verbose_name=u'Игра')
+    result = models.IntegerField(verbose_name=u'Лучший результат')
+
+    class Meta:
+        verbose_name = u'Лучший результат игры'
+        verbose_name_plural = u'Лучшие результаты игр'
+
+
+    def __unicode__(self):
+        return u'%s - %s' % (self.game, self.result)
 
 
 class UserProgress(models.Model):
@@ -221,6 +235,11 @@ class UserProgress(models.Model):
         ChallengeResult,
         verbose_name=u'Лучшие результаты испытаний',
         blank=True, null=True,default=None
+    )
+    games_best = models.ManyToManyField(
+        GamesResult,
+        verbose_name=u'Лучшие результаты игр',
+        blank=True, null=True, default=None
     )
 
     def __unicode__(self):

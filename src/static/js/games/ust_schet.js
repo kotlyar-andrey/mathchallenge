@@ -67,6 +67,10 @@ $(function () {
             $('.d, .numb').html('');
             $('#n1').html('Время вышло')[0].style.color = 'red';
             $('#smile').hide();
+            $.get(
+                '/game/game_over/',
+                {'points': game_option.points, 'game_pk': 1} //pk прописано жестко!
+            )
         }
 
         $('input#ans').keypress(function(event) {
@@ -126,8 +130,6 @@ $(function () {
             }
         });
     }
-
-
 
     function problem(obj_options) {
         var level = obj_options.lvl || 1;
@@ -384,13 +386,14 @@ $(function () {
                 break;
             case "bs": inp.val(inp.val().slice(0,inp.val().length-1));
                 break;
-//            case "enter": answer_check();
-//                break;
             default:
                 break;
         }
         inp.focus();
     });
+    $('#reload').click(function () {
+        location.reload();
+    })
 });
 
 function summa (n) {

@@ -1,0 +1,25 @@
+<div class="game_results">
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <h4>Лучшие игроки</h4>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>№</th>
+                <th>Имя</th>
+                <th>Количество баллов</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for u in users %}
+                <tr {% if u.0 == user %} class="text-strong" {% endif %}>
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="{% url 'accounts:profile' u.0.pk %}"><img class="pull-left margin-right-20 img-circle" style="width:50px;" src={{ u.0.avatar }}> {{ u.0.get_full_name }}</a></td>
+                    <td>{{ u.1 }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

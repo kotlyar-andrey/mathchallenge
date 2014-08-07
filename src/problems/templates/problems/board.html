@@ -27,7 +27,7 @@
                         <td>{{ u.get_points }}</td>
                     </tr>
                 {% endfor %}
-                {% if not user in users|slice:":10" and user.is_authenticated %}
+                {% if user.is_authenticated and not user in users|slice:":10" %}
                     <tr>
                         <td colspan="3">
                             ...
