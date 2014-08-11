@@ -77,7 +77,7 @@ def problem(request, problem_pk):
                 else:
                     messages.error(request, u'Ответ не верный.')
             else:
-                messages.error(request, u'Исправьте ошибки и попробуйте отправить ответ еще раз.')
+                messages.error(request, u'Символы с картинки введены не правильно.')
     return {'problem': problem, 'prw': prw, 'nxt': nxt, 'form': form}
 
 

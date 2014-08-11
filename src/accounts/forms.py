@@ -5,6 +5,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.models import get_current_site
 from django.utils.http import int_to_base36
 from django import forms
+from yacaptcha.fields import YaCaptchaField
 
 from .models import User
 from src.mail import send_templated_email
@@ -44,6 +45,7 @@ class CreateUserForm(forms.ModelForm):
     password2 = forms.CharField(label="Повторите пароль",
                                 widget=forms.PasswordInput,
                                 help_text="Введите пароль еще раз, чтобы не ошибиться")
+    captcha = YaCaptchaField(label=u'Введите символы с картинки')
 
     class Meta:
         model = User

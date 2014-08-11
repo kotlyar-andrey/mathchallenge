@@ -17,8 +17,7 @@
                         {{ form|bootstrap }}
                     </fieldset>
                     <button class="btn btn-block btn-success margin-bottom-20" type="submit">Регистрация</button>
-                    <small class='text-muted'>Уже зарегистрированы? <a href="{% url 'accounts:login' %}">Входите</a>
-                        или зайдите через социальную сеть.</small>
+                    <small class='text-muted'>Уже зарегистрированы? <a href="{% url 'accounts:login' %}">Входите</a></small>
                 </form>
             {% endif %}
         </div>

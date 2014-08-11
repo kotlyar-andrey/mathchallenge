@@ -50,9 +50,9 @@
     </div>
     <hr>
     <div class="well margin-bottom-20" id="problem-text">{{ problem.text|safe }}</div>
-    <div class="row"></div>
     {% if prw %}<a href="{% url 'problems:problem' prw.pk %}" class="pull-left"><i class="fa icon-green fa-long-arrow-left" title="Предыдущая задача"></i></a>{% endif %}
     {% if nxt %}<a href="{% url 'problems:problem' nxt.pk %}" class="pull-right"><i class="fa fa-long-arrow-right icon-green" title="Следующая задача"></i></a>{% endif %}
+    <div class="clearfix"></div>
     {% if user.is_authenticated and problem in user.userprogress.problems_solved_problems.all %}
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
@@ -80,6 +80,12 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <form action="." method="post">{% csrf_token %}
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">Каптча</span>
+                            {{ form.captcha }}
+                        </div>
+                    </div>
                     <div class="input-group">
                         <span class="input-group-addon">Ответ:</span>
                         {{ form.answer }}

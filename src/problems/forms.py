@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
-
-from . models import Problem
+from yacaptcha.fields import YaCaptchaField
 
 
 class AnswerForm(forms.Form):
@@ -11,3 +10,4 @@ class AnswerForm(forms.Form):
         'class': 'form-control',
         'placeholder': u'',
     })
+    captcha = YaCaptchaField(label=u'Каптча')
