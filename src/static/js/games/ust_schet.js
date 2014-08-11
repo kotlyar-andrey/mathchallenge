@@ -26,6 +26,7 @@ $(function () {
         var game_timeout = window.setTimeout(game_over, time*1000);
         var game_timer = window.setInterval(timer, 1000);
         $('.number-').click(answer_check);
+        $('.game_start').html('');
         $('#info').html($('#game_info')[0].innerHTML);
 
         function timer() {
@@ -43,9 +44,9 @@ $(function () {
                 game_option.points = game_option.lvl*10;
                 $('#points').html(game_option.points);
                 $('.level-complit')[0].style.width = ans_to_lvl*15 + 'px';
-                $('#smile').removeClass('fa-stop red-color').addClass('fa-smile-o green-color');
+                $('#smile').removeClass('fa-thumbs-down red-color').addClass('fa-thumbs-up green-color');
             } else {
-                $('#smile').removeClass('fa-smile-o green-color').addClass('fa-stop red-color');
+                $('#smile').removeClass('fa-thumbs-up green-color').addClass('fa-thumbs-down red-color');
             }
             if (game_option.points >= summa(game_option.lvl)*100) {
                 game_option.lvl += 1;
@@ -87,6 +88,7 @@ $(function () {
         mode = 'training';
         var options = {'lvl': 1, 'dd': ['+', '-', '*', '/']};
         $('.number-').click(answer_check);
+        $('.game_start').html('');
         $('#game_info').hide();
         $('#training_info').show();
         var game_answer = problem(options);
