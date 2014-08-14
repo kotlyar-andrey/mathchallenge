@@ -2,7 +2,6 @@
 
 import hashlib
 import random
-import os
 import re
 from datetime import timedelta
 
@@ -27,16 +26,20 @@ EMAIL_CONFIRMATION_DAYS = getattr(settings, 'EMAIL_CONFIRMATION_DAYS', 3)
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, username, password=None):
+    def create_user(self, username, email=None, password=None,
+                    is_staff=False, is_superuser=False, **extra_fields):
         """
         Creates and saves a User with the given email, date of
         birth and password.
         """
-        user = self.model(
-            username=username,
-            is_staff=False, is_active=True, is_superuser=False,
-            )
-
+        now = timezone.now()
+        if not username:
+            raise ValueError('The given username must be set')
+        email = self.normalize_email(email)
+        user = self.model(username=username, email=email,
+                          is_staff=is_staff, is_active=True,
+                          is_superuser=is_superuser, last_login=now,
+                          date_joined=now, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
 

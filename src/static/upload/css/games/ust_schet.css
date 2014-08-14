@@ -1,0 +1,109 @@
+.game_start {
+    width: 650px;
+    height: 550px;
+    background-image: url('../../images/games/ust_schet.png');
+    padding-top: 200px;
+    padding-left: 200px;
+}
+
+
+.schet_place{
+    border: 1px solid grey;
+    padding: 10px;
+    background-color: #ebf7fd;
+    width: 650px;
+    height: 550px;
+    display: none;
+}
+
+.numb, .d {
+    display: inline;
+    font-size: 48px;
+    margin: 5px;
+    color: blue;
+}
+
+input#ans {
+    display: inline;
+    height: 60px;
+    width: 160px;
+    margin-top: -20px;
+    padding: 6px 12px;
+    font-size: 32px;
+    line-height: 1.5;
+    color: #555555;
+    vertical-align: middle;
+    background-color: #ffffff;
+}
+div[class^='number'] {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 56px;
+    line-height: 1.5em;
+    float: left;
+}
+#info {
+    margin-left: 330px;
+    font-size: 28px;
+    text-align: center;
+    color: #555;
+}
+#points {
+    color: green;
+    font-weight: bold;
+}
+#time{
+    color:#b6111b;
+    font-weight: bold;
+}
+#level {
+    color: #00f070;
+    font-weight: bold;
+}
+.ns {
+    float: left;
+}
+#game_info, #training_info {
+    display: none;
+}
+.level-progress {
+    margin: 0 auto;
+    width: 150px;
+    height: 7px;
+    background-color: #ddd;
+}
+.level-complit {
+    background-color: green;
+    width: 0;
+    height: 7px;
+}
+#smile {
+    margin-left: 5px;
+}
+#ta{
+    color: green;
+    font-weight: bold;
+}
+#fa{
+    color:red;
+    font-weight: bold;
+}
+input#lvl {
+    width: 50px;
+}
+.options {
+    margin: 5px;
+    font-size: 16px;
+    text-align: left;
+    padding-left: 5px;
+}
+#training_start {
+    display: none;
+}
+.game_results {
+    margin-top: 20px;
+    width: 650px;
+}

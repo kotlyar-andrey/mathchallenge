@@ -347,3 +347,10 @@ ul.sb_children a:hover{
 .true-answer {
     background-color: #9affab;
 }
+
+.icon-login span{
+    border-left: 1px solid #245269;
+}
+.icon-login i{
+    padding: 2px 3px 0 3px;
+}

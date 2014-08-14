@@ -14,14 +14,17 @@
             {% else %}
                 <div class="row">
                     <div class="col-md-3 col-md-offset-2">
-                        <a href="{% url 'socialauth_begin' 'vk-oauth' %}" class="btn btn-primary btn-block margin-top-20">
-                            <i class="fa fa-vk"></i> Вход с помощью Вконтакте
+                        <a href="{% url 'socialauth_begin' 'vk-oauth' %}" class="btn btn-primary btn-block margin-top-20 icon-login">
+                            <i class="fa fa-vk pull-left"></i> Вход с помощью Вконтакте
                         </a>
-                        <a href="{% url 'socialauth_begin' 'facebook' %}" class="btn btn-primary btn-block margin-top-20">
-                            <i class="fa fa-facebook"></i> Вход с помощью Facebook
+                        <a href="{% url 'socialauth_begin' 'facebook' %}" class="btn btn-primary btn-block margin-top-20 icon-login">
+                            <i class="fa fa-facebook pull-left"></i> Вход с помощью Facebook
                         </a>
-                        <a href="{% url 'socialauth_begin' 'google-oauth2' %}" class="btn btn-primary btn-block margin-top-20">
-                            <i class="fa fa-google-plus"></i> Вход с помощью Google+
+                        <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-primary btn-block margin-top-20 icon-login">
+                            <i class="fa fa-twitter pull-left"></i> Вход с помощью Twitter
+                        </a>
+                        <a href="{% url 'socialauth_begin' 'google-oauth2' %}" class="btn btn-primary btn-block margin-top-20 icon-login">
+                            <i class="fa fa-google-plus pull-left"></i> Вход с помощью Google+
                         </a>
                     </div>
                     <div class="col-md-4 col-md-offset-1">

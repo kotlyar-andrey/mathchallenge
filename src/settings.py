@@ -65,7 +65,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = rel_project('static', 'upload')
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -161,15 +161,19 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_ERROR_URL = '/'
 
 AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
     'social_auth.backends.twitter.TwitterBackend',
     'social_auth.backends.facebook.FacebookBackend',
     'social_auth.backends.contrib.vk.VKOAuth2Backend',
     'social_auth.backends.google.GoogleOAuth2Backend',
-    'django.contrib.auth.backends.ModelBackend',
 )
 
 SOCIAL_AUTH_CREATE_USERS = True
-SOCIAL_AUTH_USER_MODEL = 'accounts.User'
+
+import random
+
+SOCIAL_AUTH_DEFAULT_USERNAME = lambda: random.choice(['Darth_Vader', 'Obi-Wan_Kenobi', 'R2-D2', 'C-3PO', 'Yoda'])
+
 
 # Перечислим pipeline, которые последовательно буду обрабатывать респонс
 SOCIAL_AUTH_PIPELINE = (
@@ -190,8 +194,8 @@ SOCIAL_AUTH_PIPELINE = (
     'social_auth.backends.pipeline.user.update_user_details'
 )
 
-FACEBOOK_APP_ID = '696381432507483'
-FACEBOOK_API_SECRET = '15afb0bbeb173aae12e8e875ffccc7a4'
+FACEBOOK_APP_ID = '231312412412412431'
+FACEBOOK_API_SECRET = 'ldsnahyioasd89asdghasodashdlas'
 
 TWITTER_CONSUMER_KEY = 'G2wMq4KYpTmgZDcjg0EzQ'
 TWITTER_CONSUMER_SECRET = 'rGHMGIbOwIEpoxjXzOahc2KmvxY8h10DpZ90LwqEjec'
@@ -201,10 +205,8 @@ VKONTAKTE_APP_ID = VK_APP_ID
 VK_API_SECRET = 'Q0owlQESOXRYd2lcgnLa'
 VKONTAKTE_APP_SECRET = VK_API_SECRET
 
-GOOGLE_CONSUMER_KEY = ''
-GOOGLE_CONSUMER_SECRET = ''
-GOOGLE_OAUTH2_CLIENT_ID = '123456789.apps.googleusercontent.com'
-GOOGLE_OAUTH2_CLIENT_SECRET = 'p0dJSDjs-dAJsdSAdaSDadasdrt'
+GOOGLE_OAUTH2_CLIENT_ID = '1daasdasdasdasd'
+GOOGLE_OAUTH2_CLIENT_SECRET = 'dDddDd'
 
 
 

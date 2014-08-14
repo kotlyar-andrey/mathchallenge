@@ -1,0 +1,349 @@
+.bor {
+    border: 1px solid red;
+}
+
+#header {
+    background-color: #285e8e;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+#header .logo{
+    margin-top: 20px;
+    display: block;
+}
+#header .logo a {
+    color: #fff;
+    font-size: 24px;
+    font-family: Comic Sans MS, sans-serif;
+}
+#header .logo a:hover {
+    text-decoration: none;
+}
+
+#rating_problems img, #new_problems img {
+    max-width: 200px;
+    display: block;
+    margin: 0 auto;
+}
+#problem-text img{
+    display: block;
+    margin: 0 auto;
+}
+.header_nav {
+    margin-top: 20px;
+}
+
+.italic {
+    font-style: italic;
+}
+.green {
+    background-color: green;
+}
+.yellow {
+    background-color: orange;
+}
+.red {
+    background-color: red;
+}
+.aqua {
+    background-color: aqua;
+}
+.grey {
+    background-color: grey;
+}
+.grey-color{
+    color: grey;
+}
+.green-color{
+    color: green;
+}
+.red-color{
+    color: #d43f3a;
+}
+.gold-color{
+    color:gold;
+}
+.yellow-color {
+    color: #ffff00;
+}
+.blue-color {
+    color:blue;
+}
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+.margin-bottom-60 {
+    margin-bottom: 60px;
+}
+.margin-top-20 {
+    margin-top: 20px;
+}
+.margin-right-20 {
+    margin-right: 20px;
+}
+.margin-right-40 {
+    margin-right: 40px;
+}
+.text-strong {
+    font-weight: bold;
+}
+
+.material {
+    background-color: #fafafa;
+    padding: 5px;
+    margin-bottom: 20px;
+    margin-right: 15px;
+}
+.material p {
+    line-height: 1.9em;
+}
+.remember_title {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Comic Sans MS, sans-serif;
+    width: 100%;
+    text-align: center;
+    color: #ff7023;
+}
+.table_button_column {
+    width: 10%;
+}
+
+.theme_prew {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+
+#footer {
+    background-color: #269abc;
+    color: #fff;
+    padding: 5px;
+    margin-top: 20px;
+}
+.feedback{
+    color:#9affab;
+}
+.feedback:hover{
+    color: #fff;
+}
+/*Index statistic*/
+.st-block{
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #9fe0e7;
+    font-size: 24px;
+    color: #555;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.st-block span {
+    font-size: 36px;
+    font-family: Comic Sans MS, sans-serif;
+    font-weight: bold;
+    color: #fff;
+}
+
+
+/*Category sidebar*/
+#sidebar {
+    width: 100%;
+}
+ul.sb_parent ul {
+    margin-bottom: 30px;
+}
+ul.sb_parent li a{
+    background-color: #334;
+    padding-left: 7px;
+    display: block;
+    color: #fff;
+    font-size: 22px;
+    margin-bottom: 7px;
+    text-align: center;
+}
+ul.sb_parent a:hover {
+    color: #eef;
+    text-decoration: none;
+}
+ul.sb_children {
+    margin-left: 27px;
+}
+ul.sb_children li a{
+     background-color: #fff;
+     color: blue;
+     font-size: 14px;
+    display: block;
+    text-align: left;
+ }
+
+ul.sb_children a:hover{
+     display: block;
+     color: #3333ff;
+}
+
+
+.problem_row {
+    cursor: pointer;
+}
+.pointer {
+    cursor: pointer;
+}
+.pointer:hover{
+    background-color: #FAFAFA;
+}
+
+.border_left {
+    border-left: 1px solid #ddd;
+}
+
+.panel-collapse > ul.list-group {
+    margin-bottom: 0;
+}
+
+.icon-green {
+    color: green;
+}
+
+.alert-error {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+.alert-error hr {
+    border-top-color: #e4b9c0;
+}
+
+.alert-error .alert-link {
+    color: #843534;
+}
+
+.favorites_icon {
+    color: gold;
+}
+.favorites_icon:hover{
+    color: #ff5b25;
+}
+
+/*Profile*/
+.problems_cat_container{
+    width: 30%;
+    margin: 10px 1%;
+    float: left;
+    border: 1px solid #e6b2ff;
+    border-radius: 5px;
+}
+.problems_cat_container .title{
+    font-size: 18px;
+    color: #5d0097;
+    background-color: #c5efe7;
+    padding: 5px 10px;
+}
+.done {
+    background-color: greenyellow;
+}
+.done:hover{
+    background-color: lawngreen;
+}
+.prtable {
+    margin: 0 auto;
+    width: 100%;
+}
+.prtable > thead > tr > th,
+.prtable > tbody > tr > th,
+.prtable > tfoot > tr > th,
+.prtable > thead > tr > td,
+.prtable > tbody > tr > td,
+.prtable > tfoot > tr > td {
+    border: 1px solid #dddddd;
+    padding: 2px;
+    text-align: center;
+}
+
+.progress_bar_text {
+    overflow: visible;
+    white-space: nowrap;
+    text-shadow: 1px 1px 1px #777;
+}
+
+.best_res {
+    display: block;
+}
+.best_res_title {
+    width: 100px;
+    padding: 5px;
+    margin: 10px;
+    border: 1px solid #6fd840;
+    display: block;
+    float: left;
+}
+.best_res_result {
+    margin: 10px;
+    margin-right: 20px;
+    font-size: 24px;
+    width: 80px;
+    display: block;
+    float: left;
+    text-align: center;
+}
+.challenge_go {
+    width: 140px;
+    margin-top: 10px;
+}
+/* Achievments*/
+.achievment {
+    position: relative;
+    display: inline-block;
+    width: 250px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    min-height: 60px;
+    padding: 5px;
+    padding-left: 55px;
+    border: 1px solid white;
+    vertical-align: top;
+    border-radius: 4px;
+    box-shadow: 0 0 3px rgba(0,0,0,0.2);
+}
+.achievment_icon{
+    position: absolute;
+    left: 5px;
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    text-align: center;
+    opacity: .5;
+    -moz-transition: opacity .5s;
+    transition: opacity .5s;
+    background: #19d;
+}
+.achievment_body{
+    width: 180px;
+    margin-left: 10px;
+    -moz-transition: opacity .5s .3s;
+    transition: opacity .5s .3s;
+}
+
+/*Challenge kenguru and olimpiada*/
+.challenge_problem img{
+    display: block;
+    margin: 0 auto;
+}
+.kenguru-answer-form form{
+    display: block;
+}
+#timer {
+    position: fixed;
+    right: 10px;
+    top: 100px;
+    width: 100px;
+    height: 30px;
+    font-size:1.2em;
+}
+.false-answer {
+    background-color: #ff666b;
+}
+.true-answer {
+    background-color: #9affab;
+}
