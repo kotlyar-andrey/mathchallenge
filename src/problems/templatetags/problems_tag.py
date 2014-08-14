@@ -29,3 +29,15 @@ def tables(context, objects):
 @register.filter()
 def index_of(obj, l):
     return l.index(obj)
+
+
+@register.filter()
+def backgroung_slogn(value):
+    if value == 1:
+        return 'slogn1'
+    elif value == 2:
+        return 'slogn2'
+    elif value == 3:
+        return 'slogn3'
+    else:
+        return

@@ -1,4 +1,5 @@
 {% extends 'problems/base_problems.html' %}
+{% load problems_tag %}
 
 {% block title %}{{ category.title }} - Math Challenge{% endblock %}
 
@@ -6,7 +7,7 @@
     <div class="text-muted margin-bottom-20">
         <strong>{{ category.title }}</strong> - {{ category.description }}
     </div>
-    <table class="table table-hover">
+    <table class="table problems-table">
         <thead>
             <tr>
                 <th>N</th>
@@ -19,7 +20,7 @@
             </tr>
         </thead>
         {% for problem in problems %}
-            <tr>
+            <tr class="{{ problem.slogn|backgroung_slogn }}">
                 <td>{{ problem.number }}</td>
                 <td style="white-space: nowrap" class="border_left">
                     <span{% if problem.rating > 0 %} style="color:#00a000;"{% elif problem.rating < 0 %} style="color:#a00000"{% endif %}>

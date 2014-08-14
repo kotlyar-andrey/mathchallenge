@@ -225,6 +225,19 @@ ul.sb_children a:hover{
 .favorites_icon:hover{
     color: #ff5b25;
 }
+.slogn1 {
+    background-color: #effffd;
+}
+.slogn2 {
+    background-color: #ffffc0;  fff69a;
+}
+.slogn3 {
+    background-color: #fff1e1;
+}
+.problems-table tr:hover{
+    background-color: #fbfbfb;
+}
+
 
 /*Profile*/
 .problems_cat_container{
