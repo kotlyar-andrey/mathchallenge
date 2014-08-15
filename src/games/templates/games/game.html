@@ -18,7 +18,7 @@
             <hr>
             {% if not user.is_authenticated %}
                 <div class="alert alert-warning">
-                    <a href="{% url 'accounts:login' %}?next={{ request.path }}">Авторизуйтесь</a> чтобы иметь возможность сохранить прогресс игры
+                    <a href="{% url 'accounts:login' %}?next={{ request.path }}">Авторизуйтесь</a> чтобы иметь возможность сохранить результат игры
                 </div>
             {% endif %}
             {{ game.content|safe }}

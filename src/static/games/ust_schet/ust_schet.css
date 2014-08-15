@@ -1,7 +1,7 @@
 .game_start {
     width: 650px;
     height: 550px;
-    background-image: url('../../images/games/ust_schet.png');
+    background-image: url('ust_schet.png');
     padding-top: 200px;
     padding-left: 200px;
 }

@@ -1,0 +1,27 @@
+.place {
+    width: 900px;
+    height: 900px;
+}
+
+.karta {
+    display: block;
+    width: 140px;
+    height: 200px;
+    border-radius: 7px;
+    border: 1px solid #333;
+    margin: 0 5px 10px 4px;
+    background-color: #0070f0;
+    float: left;
+}
+.karta .active {
+    background-color: #f1f1ff;
+}
+.karta .deactive {
+    background-color: #fff;
+    border: 0;
+}
+.karta .text {
+    text-align: center;
+    margin-top: 80px;
+    font-size: 24px;
+}
