@@ -89,6 +89,8 @@ def profile(request, user_pk):
 
     #Испытания
     chall_cat = [cb.category for cb in user_obj.userprogress.challenge_best.all()]
+    challenge_categories = {'kenguru': Category.objects.get(slug='kenguru').get_children(),
+                            'olimpiada': Category.objects.get(slug='olimpiada').get_children()}
 
     #Избранное
     favorite_problems = user_obj.favorite_problems.all()
@@ -100,7 +102,8 @@ def profile(request, user_pk):
             'themes': themes,
             'chall_cat': chall_cat,
             'favorites': favorite_problems,
-            'achievments': achievments,}
+            'achievments': achievments,
+            'challenge_categories': challenge_categories}
 
 
 @render_to('accounts/edit.html')

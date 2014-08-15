@@ -21,15 +21,15 @@ $(function () {
             data: $('#answer_form').serialize(),
             success: function (req) {
                 $('#target').html(req);
-                $('#timer').hide();
-                $('#button_res').html('');
-                $('.kenguru-answer-form').hide();
-                $('.challenge_problem hr').hide();
             },
             error: function () {
                 $('#target').html('Ошибка.');
             }
         });
+        $('#timer').hide();
+        $('#button_res').html('');
+        $('.kenguru-answer-form').hide();
+        $('.challenge_problem hr').hide();
     }
     window.setInterval(timer, 1000);
     window.setTimeout(check, 4500000);

@@ -84,27 +84,42 @@
 
                     <div class="tab-pane fade" id="challenge">
                         <div class="margin-top-20"></div>
-                        <h4>Лучшие результаты испытаний</h4>
-                        {% for cat in categories %}
-                            {% for l in cat.1 %}
-                                {% for c in l %}
-                                    <div class="best_res">
-                                        <div class="best_res_title">{{ c.title }}</div>
-                                            {% if c in chall_cat %}
-                                                {% for cb in user.userprogress.challenge_best.all %}
-                                                    {% if c == cb.category %}
-                                                        <div class="best_res_result {{ cb.result|kenguru_result:c.slug }}"> {{ cb.result }}</div>
-                                                        <a class="btn btn-primary challenge_go" href="{% url 'challenges:challenge' c.slug %}">Пройти еще раз</a>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            {% else %}
-                                                <div class="best_res_result">&nbsp;-</div>
-                                                <a class="btn btn-primary challenge_go" href="{% url 'challenges:challenge' c.slug %}">Пройти</a>
+{#                        <h3>Лучшие результаты испытаний</h3>#}
+                        <h4>Кенгуру</h4>
+                        {% for c in challenge_categories.kenguru %}
+                            <div class="best_res">
+                                <div class="best_res_title">{{ c.title }}</div>
+                                    {% if c in chall_cat %}
+                                        {% for cb in user.userprogress.challenge_best.all %}
+                                            {% if c == cb.category %}
+                                                <div class="best_res_result {{ cb.result|kenguru_result:c.slug }}"> {{ cb.result }}</div>
+                                                <a class="btn btn-primary challenge_go" href="{% url 'challenges:challenge' c.slug %}">Пройти еще раз</a>
                                             {% endif %}
-                                        <div class="clearfix"></div>
-                                    </div>
-                                {% endfor %}
-                            {% endfor %}
+                                        {% endfor %}
+                                    {% else %}
+                                        <div class="best_res_result">&nbsp;-</div>
+                                        <a class="btn btn-primary challenge_go" href="{% url 'challenges:challenge' c.slug %}">Пройти</a>
+                                    {% endif %}
+                                <div class="clearfix"></div>
+                            </div>
+                        {% endfor %}
+                        <h4>Олимпиада</h4>
+                        {% for c in challenge_categories.olimpiada %}
+                            <div class="best_res">
+                                <div class="best_res_title">{{ c.title }}</div>
+                                {% if c in chall_cat %}
+                                    {% for cb in user.userprogress.challenge_best.all %}
+                                        {% if c == cb.category %}
+                                            <div class="best_res_result {{ cb.result|kenguru_result:c.slug }}"> {{ cb.result }}</div>
+                                            <a class="btn btn-primary challenge_go" href="{% url 'challenges:challenge' c.slug %}">Пройти еще раз</a>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="best_res_result">&nbsp;-</div>
+                                    <a class="btn btn-primary challenge_go" href="{% url 'challenges:challenge' c.slug %}">Пройти</a>
+                                {% endif %}
+                                <div class="clearfix"></div>
+                            </div>
                         {% endfor %}
                     </div>
 

@@ -108,3 +108,38 @@ def kenguru_check(request):
     else:
         raise Http404
 
+
+def olimpiada_check(request):
+    if request.is_ajax():
+        true_count, ball, true_problems, cb_result = (0, 0, [], '')
+        for k in request.GET.keys():
+            problem = get_object_or_404(Problem, pk=int(k[6:]))
+            answer = request.GET[k]
+            if answer == problem.answer:
+                true_problems.append(problem)
+                true_count += 1
+                ball += 7
+            cat = problem.category.slug
+        if request.user.is_authenticated():
+            category = get_object_or_404(Category, slug=cat)
+            try:
+                oldres = request.user.userprogress.challenge_best.get(category=category)
+                if oldres.result < ball:
+                    oldres.result = ball
+                    oldres.save()
+            except:
+                bestres = ChallengeResult(category=category,result=ball)
+                bestres.save()
+                request.user.userprogress.challenge_best.add(bestres)
+            for cb in request.user.userprogress.challenge_best.all():
+                if category == cb.category:
+                    cb_result = cb.result
+                    break
+        return render_to_response('challenge/_olimpiada_res.html', {'true_count': true_count,
+                                                                  'ball': ball,
+                                                                  'true_problems': true_problems,
+                                                                  'cat': cat,
+                                                                  'cb_result': cb_result})
+    else:
+        raise Http404
+
