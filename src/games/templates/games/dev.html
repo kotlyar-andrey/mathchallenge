@@ -1,77 +1,42 @@
 {% extends 'games/base_games.html' %}
 
 {% block head %}
-    <link rel="stylesheet" href="/static/css/games/ust_schet.css">
-    <script src="/static/js/games/ust_schet.js"></script>
+    <link rel="stylesheet" href="/static/games/math_member/math_member.css">
+    <script src="/static/games/math_member/math_member.js"></script>
 {% endblock %}
 
 {% block content_games %}
     <div class="row">
         <div class="col-md-12">
             <div class="game_start">
-                <button id="training" class="btn btn-lg btn-primary">Тренироваться</button>
-                <button id="game" class="btn btn-lg btn-primary">Играть</button>
+                <div class="options">
+                    Играть одному <input type="radio" name="regim" class="radio radio-inline" value="alone" checked="checked"><br>
+                    Играть против компьютера <input type="radio" name="regim" class="radio radio-inline" value="komp"><br>
+                    Действия:
+                    <label class="checkbox-inline">
+                        <input id="pls" type="checkbox" value="+" checked="">+
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" value="-" checked="">-
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" value="*" checked="">*
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" value="/" checked="">/
+                    </label>
+                </div>
             </div>
-            <div class="schet_place">
-                <div id="n1" class="numb"></div>
-                <div id="d" class="d"></div>
-                <div id="n2" class="numb"></div>
-                <div class="d">=</div>
-                <input id="ans" class="" type="text" autofocus="autofocus"><i id='smile' class="pull-right fa fa-4x"></i>
-                <div class="ns">
-                    <div class="number1 btn btn-success" data-n="1">1</div>
-                    <div class="number2 btn btn-success" data-n="2">2</div>
-                    <div class="number3 btn btn-success" data-n="3">3</div>
-                    <div class="clearfix"></div>
-                    <div class="number4 btn btn-success" data-n="4">4</div>
-                    <div class="number5 btn btn-success" data-n="5">5</div>
-                    <div class="number6 btn btn-success" data-n="6">6</div>
-                    <div class="clearfix"></div>
-                    <div class="number7 btn btn-success" data-n="7">7</div>
-                    <div class="number8 btn btn-success" data-n="8">8</div>
-                    <div class="number9 btn btn-success" data-n="9">9</div>
-                    <div class="clearfix"></div>
-                    <div class="number0 btn btn-success" data-n="0">0</div>
-                    <div class="number_ btn btn-success" data-n="bs"><i class="fa fa-long-arrow-left"></i></div>
-                    <div class="number- btn btn-success" data-n="enter">=</div><div class="clearfix"></div>
-                </div>
-                <div id="info">
-                    <div id="game_info">
-                        Время:<br>
-                        <span id="time">01:00</span><br>
-                        Уровень:<br>
-                        <span id="level">1</span><br>
-                        <div class="level-progress"><div class="level-complit"></div></div><br>
-                        Баллов:<br>
-                        <span id="points">0</span>
-                    </div>
-                    <div id="training_info">
-                        Правильно:<br>
-                        <span id="ta">0</span><br>
-                        Не правильно:<br>
-                        <span id="fa">0</span><br>
-                        Опции:<br>
-                        <div class="options">
-                            <span>Уровень:</span> <input class="input-sm form-control" style="display: inline" type="number" id="lvl" value="1" max="7" min="1">
-                            <button id="training_start" class="btn btn-sm btn-default pull-right">OK</button><br>
-                            <span>Действия:</span>
-                            <label class="checkbox-inline">
-                                <input id="pls" type="checkbox" value="+" checked>+
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" value="-" checked>-
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" value="*" checked>*
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" value="/" checked>/
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                <div class="pull-right"><i id="reload" class="grey-color pointer fa fa-2x fa-reply"></i></div>
+            <button id="start" class="btn btn-success">Начать</button>
+            <div class="place">
+
+            </div>
+        </div>
+    </div>
+    <div id="templates">
+        <div class="template card">
+            <div class="karta">
+                <div class="text"></div>
             </div>
         </div>
     </div>
