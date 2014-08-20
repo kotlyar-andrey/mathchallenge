@@ -1,0 +1,10 @@
+{% extends 'problems/base_problems.html' %}
+
+{% block content_problem %}
+    {% for pr in error_problems %}
+        <a href="{% url 'problems:problem' pr.pk %}">
+            {{ pr.text|safe }}
+        </a>
+        <hr>
+    {% endfor %}
+{% endblock %}

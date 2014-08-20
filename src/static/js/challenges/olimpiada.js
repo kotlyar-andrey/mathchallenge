@@ -1,5 +1,5 @@
 $(function () {
-    var time = 300;
+    var time = 10800;
     function timer() {
         time = time - 1;
         hh = Math.floor(time/3600);

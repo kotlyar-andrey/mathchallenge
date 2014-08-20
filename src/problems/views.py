@@ -109,6 +109,25 @@ def pr_numbering(request):
     return HttpResponseRedirect('/')
 
 
+@render_to('problems/error_test.html')
+def error_test(request):
+    error_problems = []
+    if request.user.username == 'kotlyar':
+        keng_cat = Category.objects.get(slug='kenguru').get_children()
+        for cat in keng_cat:
+            for pr in cat.problem_set.all():
+                check = False
+                for variant in pr.variant_set.all():
+                    if variant.tru:
+                        check = True
+                        if not pr.answer in variant.val:
+                            error_problems.append(pr)
+                        break
+                if not check:
+                    error_problems.append(pr)
+    return {'error_problems': error_problems}
+
+
 @render_to('problems/board.html')
 def board(request):
     all_u = User.objects.all()

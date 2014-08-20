@@ -10,4 +10,5 @@ urlpatterns = patterns('src.problems.views',
     url(r'^board/$', 'board', name='board'),
     url(r'^add_fav/(?P<problem_pk>\d+)/$', 'add_fav', name='add_fav'),
     url(r'^numbering/$', 'pr_numbering', name='pr_numbering'),
+    url(r'errortest/$', 'error_test'),
 )
