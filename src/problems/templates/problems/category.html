@@ -3,6 +3,10 @@
 
 {% block title %}{{ category.title }} - Math Challenge{% endblock %}
 
+{% block page_desc %}
+    {{ category.description }}
+{% endblock %}
+
 {% block content_problem %}
     <div class="text-muted margin-bottom-20">
         <strong>{{ category.title }}</strong> - {{ category.description }}

@@ -5,6 +5,10 @@
     Задача по математике
 {% endblock %}
 
+{% block page_desc %}
+    {{ problem.text }}
+{% endblock %}
+
 {% block content_problem %}
     {% if not user.is_authenticated %}
         <div class="alert alert-warning">
